@@ -16,6 +16,8 @@ app.listen(port, function() {
 
 app.post('/products', products.create);
 
+app.get('/test', products.test);
+
 app.get('/products', products.index);
 app.get('/products/:id', products.show);
 
@@ -23,3 +25,4 @@ app.put('/products/:id', products.update);
 
 app.delete('/products/:id', products.delete);
 
+module.exports = app;

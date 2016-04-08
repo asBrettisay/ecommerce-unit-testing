@@ -6,6 +6,13 @@ var db = mongojs(config.mongoURI[process.env.NODE_ENV]),
 
 
 module.exports = {
+  test(req, res) {
+    res.status(200).json(
+      {
+        message: 'foo'
+      }
+    )
+  },
   create: function(req, res, next) {
     Products.insert(req.body, function(err, r) {
       if (err) {
