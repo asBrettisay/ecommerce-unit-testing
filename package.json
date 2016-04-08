@@ -4,6 +4,8 @@
   "description": "An ecommerce project for students at DevMountain to practice using MongoDB",
   "main": "server.js",
   "scripts": {
+    "postinstall": "bower install",
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,5 +24,8 @@
     "cors": "^2.7.1",
     "express": "^4.13.4",
     "mongojs": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.1"
   }
 }

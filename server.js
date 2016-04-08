@@ -8,7 +8,7 @@ app = express();
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
-var port = 3000
+var port = process.env.port || 3000
 app.listen(port, function() {
   console.log('A Lannister always pays his debts...')
 })
@@ -22,3 +22,4 @@ app.get('/products/:id', products.show);
 app.put('/products/:id', products.update);
 
 app.delete('/products/:id', products.delete);
+
