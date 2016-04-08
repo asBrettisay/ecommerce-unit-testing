@@ -1,5 +1,6 @@
 var mongojs = require('mongojs'),
-    db = mongojs('ecommerce'),
+    config = require('../_config');
+var db = mongojs(config.mongoURI[process.env.NODE_ENV]),
     Products = db.collection('products'),
     ObjectId = mongojs.ObjectId;
 
