@@ -1,45 +1,48 @@
-var mongojs = require('mongojs'),
-    db = mongojs('ecommerce'),
-    Products = db.collection('products'),
-    ObjectId = mongojs.ObjectId;
+const mongoose = require('mongoose')
+    , Product  = require('../models/Product')
+    , ObjectId = mongoose.Schema.ObjectId;
 
 
 module.exports = {
+  test: (req, res, next) => {
+    res.json({message: 'foo'})
+  },
   create: function(req, res, next) {
-    Products.insert(req.body, function(err, r) {
-      if (err) {
-        console.log(err)
+    new Product(req.body).save((e, r) => {
+      if (e) {
+        console.log(e)
         res.status(500).send();
+      } else {
+        res.status(200).json(r);
       }
-      res.status(200).json(r);
     })
   },
 
   index: function(req, res, next) {
-    Products.find(function(err, r) {
-      if (err) {
-        console.log(err)
+    Product.find((e, r) => {
+      if (e) {
         res.status(500).send();
+      } else {
+        res.status(200).json(s);
       }
-      res.status(200).json(r);
     })
   },
 
   show: function(req, res, next) {
-    Products.find({_id: ObjectId(req.params.id)}, function(err, r) {
-      if (err) {
-        console.log(err)
+    Product.findById(req.params.id, (e, r) => {
+      if (e) {
+        console.log(e)
         res.status(500).send();
+      } else {
+        res.status(200).json(r);
       }
-      res.status(200).json(r);
     })
   },
 
   update: function(req, res, next) {
-    delete(req.body._id);
-    Products.update({_id: ObjectId(req.params.id)}, {$set: req.body}, function(err, r) {
-      if (err) {
-        console.log(err)
+    Product.update({_id: ObjectId(req.params.id)}, req.body, (e, r) => {
+      if (e) {
+        console.log(e)
         res.status(500).send();
       } else {
         res.status(200).json(r)
@@ -48,12 +51,13 @@ module.exports = {
   },
 
   delete: function(req, res, next) {
-    Products.remove({_id: ObjectId(req.params.id)}, function(err, r) {
-      if (err) {
-        console.log(err)
+    Product.remove({_id: ObjectId(req.params.id)}, function(e, r) {
+      if (e) {
+        console.log(e)
         res.status(500).send();
+      } else {
+        res.status(200).json(r);
       }
-      res.status(200).json(r);
     })
   }
 }
