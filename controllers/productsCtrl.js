@@ -4,9 +4,6 @@ const mongoose = require('mongoose')
 
 
 module.exports = {
-  test: (req, res, next) => {
-    res.json({message: 'foo'})
-  },
   create: function(req, res, next) {
     new Product(req.body).save((e, r) => {
       if (e) {

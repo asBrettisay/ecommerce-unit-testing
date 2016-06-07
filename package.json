@@ -20,9 +20,7 @@
   "homepage": "https://github.com/asBrettisay/ecommerce#readme",
   "dependencies": {
     "body-parser": "^1.15.0",
-    "cors": "^2.7.1",
     "express": "^4.13.4",
-    "mongojs": "^2.3.0",
     "mongoose": "^4.4.20"
   },
   "devDependencies": {
