@@ -4,7 +4,6 @@
   "description": "An ecommerce project for students at DevMountain to practice using MongoDB",
   "main": "server.js",
   "scripts": {
-    "postinstall": "npm install",
     "start": "nodemon server.js"
   },
   "repository": {
