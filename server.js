@@ -19,7 +19,6 @@ app.listen(port, function() {
   console.log('A Lannister always pays his debts...')
 })
 
-app.get('/test', products.test);
 app.post('/products', products.create);
 
 app.get('/products', products.index);
