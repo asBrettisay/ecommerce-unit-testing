@@ -1,60 +1,57 @@
-const mongoose = require('mongoose')
-    , Product  = require('../models/Product')
-    , ObjectId = mongoose.Schema.ObjectId;
+const Products = require('../models/Product')
+    , ObjectId = require('mongoose').Schema.ObjectId;
 
 
 module.exports = {
   create: function(req, res, next) {
-    new Product(req.body).save((e, r) => {
-      if (e) {
-        console.log(e)
-        res.status(500).send();
-      } else {
-        res.status(200).json(r);
+    Products.create(req.body, function(err, r) {
+      if (err) {
+        console.log(err)
+        return res.status(500).send();
       }
+      res.status(200).json(r);
     })
   },
 
   index: function(req, res, next) {
-    Product.find((e, r) => {
-      if (e) {
+    Products.find(function(err, r) {
+      if (err) {
+        console.log(err)
         res.status(500).send();
-      } else {
-        res.status(200).json(s);
       }
+      res.status(200).json(r);
     })
   },
 
   show: function(req, res, next) {
-    Product.findById(req.params.id, (e, r) => {
-      if (e) {
-        console.log(e)
-        res.status(500).send();
-      } else {
-        res.status(200).json(r);
+    Products.find({_id: req.params.id}, function(err, r) {
+      if (err) {
+        console.log(err)
+        return res.status(500).send();
       }
+      return res.status(200).json(r);
     })
   },
 
   update: function(req, res, next) {
-    Product.update({_id: ObjectId(req.params.id)}, req.body, (e, r) => {
-      if (e) {
-        console.log(e)
-        res.status(500).send();
+    delete(req.body._id);
+    Products.update({_id: req.params.id}, {$set: req.body}, function(err, r) {
+      if (err) {
+        console.log(err)
+        return res.status(500).send();
       } else {
-        res.status(200).json(r)
+        return res.status(200).json(r)
       }
     })
   },
 
   delete: function(req, res, next) {
-    Product.remove({_id: ObjectId(req.params.id)}, function(e, r) {
-      if (e) {
-        console.log(e)
-        res.status(500).send();
-      } else {
-        res.status(200).json(r);
+    Products.remove({_id: req.params.id}, function(err, r) {
+      if (err) {
+        console.log(err)
+        return res.status(500).send();
       }
+      return res.status(200).json(r);
     })
   }
 }
