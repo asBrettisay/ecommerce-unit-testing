@@ -24,7 +24,7 @@ module.exports = {
   },
 
   show: function(req, res, next) {
-    Products.find({_id: req.params.id}, function(err, r) {
+    Products.findOne({_id: req.params.id}, function(err, r) {
       if (err) {
         console.log(err)
         return res.status(500).send();

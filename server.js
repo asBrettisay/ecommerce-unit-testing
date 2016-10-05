@@ -1,13 +1,17 @@
 const express = require('express'),
       bodyParser = require('body-parser'),
       products = require('./controllers/productsCtrl'),
-      mongoose = require('mongoose');
+      mongoose = require('mongoose'),
+      config   = require('./_config');
 
-const app = express();
 
-mongoose.connect('mongodb://localhost/ecommerce', function(err, res) {
+const app = module.exports = express();
+
+console.log('PROCESS', process.env.NODE_ENV);
+
+mongoose.connect(config.mongoURI[process.env.NODE_ENV], function(err, res) {
   if (err) console.log('Error connecting to the database.')
-  else console.log('Connected to the database.')
+  else console.log('Connected to the '+ process.env.NODE_ENV + 'database.')
 })
 
 app.use(bodyParser.json());

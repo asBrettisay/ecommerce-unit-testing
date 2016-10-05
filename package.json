@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "postinstall": "cd public && bower install && cd .. && npm start",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "test": "NODE_ENV=test && mocha controllers/productsCtrl.spec.js"
   },
   "repository": {
     "type": "git",
